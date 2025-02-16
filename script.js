@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showBookingForm();
         document.querySelector('.btn').style.display = 'none'; // Hide the button
     });
-  
+
     // Content for different sections
     const sections = {
         'Main': '<h2>Welcome to UrbanPEDALS</h2><p>Your one-stop shop for all things biking!</p>',
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `
     };
-  
+
     // Navigation link functionality
     document.querySelectorAll('ul li a').forEach(link => {
         link.addEventListener('click', (event) => {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-  
+
     // Initialize Google Map
     function initMap() {
         const location = { lat: 43.6532, lng: -79.3832 }; // Coordinates for 123 Yonge Street, Toronto
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             map: map
         });
     }
-  
+
     // Show booking form
     function showBookingForm() {
         const bookingForm = `
@@ -115,14 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         document.querySelector('.titre').innerHTML = bookingForm;
-  
+
         // Handle form submission
         document.getElementById('booking-form').addEventListener('submit', (event) => {
             event.preventDefault();
             showConfirmation();
         });
     }
-  
+
     // Show confirmation page
     function showConfirmation() {
         const name = document.getElementById('name').value;
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = document.getElementById('date').value;
         const specialist = document.getElementById('specialist').value;
         const service = document.getElementById('service').value;
-  
+
         const confirmation = `
             <div class="confirmation">
                 <h2>🎉 Booking Confirmed! 🎉</h2>
@@ -142,11 +142,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Specialist: ${specialist}</p>
                 <p>Service: ${service}</p>
                 <div class="emoji">🚴‍♂️🚴‍♀️</div>
+                <button id="close-confirmation">Close</button>
+                <button id="book-again">Book Again</button>
             </div>
         `;
         document.querySelector('.titre').innerHTML = confirmation;
+
+        // Add event listener to the close button
+        document.getElementById('close-confirmation').addEventListener('click', () => {
+            document.querySelector('.titre').innerHTML = sections['Main'];
+            document.querySelector('.btn').style.display = 'block'; // Show the booking button again
+        });
+
+        // Add event listener to the book again button
+        document.getElementById('book-again').addEventListener('click', () => {
+            showBookingForm();
+        });
     }
-  
+
     // Setup service options
     function setupServiceOptions() {
         document.querySelectorAll('.service-option').forEach(option => {
@@ -178,4 +191,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-  });
+});
